@@ -1,131 +1,81 @@
-# Customer Churn Prediction using Machine Learning and Neural Networks
+# Customer Churn Prediction using Logistic Regression and Neural Networks
 
-## Overview
+Predicting customer churn is one of the most important business applications of machine learning. Companies can significantly reduce customer loss by identifying customers who are likely to leave and taking preventive actions beforehand.
 
-Customer churn prediction is a supervised machine learning problem that aims to identify customers who are likely to discontinue using a company's services.
-
-Customer retention is often more cost-effective than acquiring new customers. By predicting churn in advance, organizations can take proactive measures to improve customer satisfaction and reduce revenue loss.
-
-This project develops and compares two classification models:
+This project implements and compares two machine learning approaches:
 
 - Logistic Regression
-- Neural Network (MLP Classifier)
+- Artificial Neural Network (MLP Classifier)
 
-The project covers the complete machine learning workflow, including data preprocessing, exploratory data analysis, model training, evaluation, visualization, and performance comparison.
-
----
-
-## Problem Statement
-
-The objective of this project is to predict whether a customer will leave the bank based on demographic and account-related information.
-
-Target Variable:
-
-| Value | Meaning |
-|---------|----------|
-| 0 | Customer Stays |
-| 1 | Customer Leaves |
+The complete workflow includes data preprocessing, exploratory data analysis, model training, evaluation, feature importance analysis, ROC curve analysis, and model comparison.
 
 ---
 
-## Dataset Information
+# Table of Contents
 
-The project uses the Churn Modelling Dataset containing customer banking information.
+1. Project Overview
+2. Dataset Description
+3. Project Structure
+4. Exploratory Data Analysis
+5. Data Preprocessing
+6. Machine Learning Models
+7. Model Evaluation
+8. Results and Discussion
+9. Visualizations
+10. Future Improvements
+11. Installation
+12. Author
 
-### Features
+---
+
+# Project Overview
+
+Customer churn occurs when a customer decides to stop using a company's service.
+
+The primary objective of this project is to predict whether a customer will leave the bank based on historical customer information.
+
+This prediction allows organizations to:
+
+- Improve customer retention
+- Reduce customer acquisition costs
+- Increase profitability
+- Develop targeted marketing strategies
+- Improve customer satisfaction
+
+---
+
+# Dataset Description
+
+The dataset contains customer demographic and financial information.
+
+## Features
 
 | Feature | Description |
 |----------|-------------|
 | CreditScore | Customer credit score |
-| Geography | Country of residence |
+| Geography | Customer country |
 | Gender | Customer gender |
 | Age | Customer age |
-| Tenure | Years with the bank |
+| Tenure | Number of years with bank |
 | Balance | Account balance |
 | NumOfProducts | Number of products used |
 | HasCrCard | Credit card ownership |
-| IsActiveMember | Activity status |
+| IsActiveMember | Customer activity status |
 | EstimatedSalary | Estimated annual salary |
-| Exited | Churn indicator (Target Variable) |
+| Exited | Target Variable |
 
 ---
 
-## Project Workflow
+## Target Variable
 
-### 1. Data Collection
-
-- Load customer dataset
-- Inspect data structure
-- Verify data quality
-
-### 2. Data Preprocessing
-
-- Remove unnecessary columns
-- Label Encoding
-- One-Hot Encoding
-- Feature Scaling
-- Train-Test Split
-
-### 3. Exploratory Data Analysis (EDA)
-
-Performed exploratory analysis to understand customer behavior patterns and feature relationships.
-
-Visualizations include:
-
-- Customer Churn Distribution
-- Gender Distribution
-- Age Distribution
-- Correlation Heatmap
-
-### 4. Model Development
-
-Two machine learning models were implemented:
-
-#### Logistic Regression
-
-A linear classification model used as a baseline approach.
-
-#### Neural Network (MLP Classifier)
-
-A feed-forward artificial neural network capable of learning nonlinear relationships within the dataset.
-
-### 5. Model Evaluation
-
-Models were evaluated using:
-
-- Accuracy Score
-- Precision
-- Recall
-- F1 Score
-- Confusion Matrix
-- ROC Curve
-- AUC Score
-
-### 6. Model Comparison
-
-Performance comparison between Logistic Regression and Neural Network models.
-
-### 7. Feature Importance Analysis
-
-Feature importance was analyzed to identify the most influential factors contributing to customer churn.
+| Value | Meaning |
+|---------|----------|
+| 0 | Customer Retained |
+| 1 | Customer Churned |
 
 ---
 
-## Technologies Used
-
-| Category | Tools |
-|-----------|--------|
-| Programming Language | Python |
-| Development Environment | Jupyter Notebook |
-| Data Manipulation | Pandas, NumPy |
-| Visualization | Matplotlib, Seaborn |
-| Machine Learning | Scikit-Learn |
-| Neural Network | MLPClassifier |
-| Version Control | Git, GitHub |
-
----
-
-## Project Structure
+# Project Structure
 
 ```text
 CUSTOMER-CHURN-PREDICTION/
@@ -142,65 +92,140 @@ CUSTOMER-CHURN-PREDICTION/
 │
 ├── requirements.txt
 │
-├── .gitattributes
+├── README.md
 │
-└── README.md
+└── .gitattributes
 ```
 
 ---
 
-## Correlation Heatmap
+# Exploratory Data Analysis
 
-The correlation heatmap helps identify relationships among numerical features and provides insights into variables that influence churn.
+Before model development, exploratory data analysis was performed to understand feature relationships and customer behavior patterns.
 
-![Correlation Heatmap](images/heatmap.png)
+The following analyses were conducted:
 
----
-
-## Feature Importance Analysis
-
-Feature importance analysis highlights the most influential customer attributes affecting churn prediction.
-
-![Feature Importance](images/feature_importance.png)
+- Customer churn distribution
+- Gender distribution
+- Age distribution
+- Correlation analysis
+- Feature relationship analysis
 
 ---
 
-## Models Implemented
+# Correlation Analysis
 
-### Logistic Regression
+The correlation heatmap visualizes relationships among numerical variables and helps identify influential features.
 
-Advantages:
+<p align="center">
+  <img src="images/heatmap.png" width="850">
+</p>
 
+---
+
+# Data Preprocessing
+
+Several preprocessing techniques were applied before model training.
+
+### Data Cleaning
+
+- Removed RowNumber
+- Removed CustomerId
+- Removed Surname
+
+### Encoding
+
+#### Label Encoding
+
+Applied to:
+
+- Gender
+
+#### One-Hot Encoding
+
+Applied to:
+
+- Geography
+
+### Feature Scaling
+
+StandardScaler was used to normalize numerical features.
+
+### Dataset Split
+
+Training Set : 80%
+
+Testing Set : 20%
+
+---
+
+# Machine Learning Models
+
+## 1. Logistic Regression
+
+Logistic Regression is a linear classification algorithm widely used for binary classification tasks.
+
+### Advantages
+
+- Simple implementation
 - Fast training
-- Easy interpretation
-- Computationally efficient
+- Interpretable coefficients
 - Strong baseline model
 
-Limitations:
+### Limitations
 
 - Assumes linear relationships
-- Limited capability for complex patterns
+- Limited ability to model complex interactions
 
 ---
 
-### Neural Network (MLP Classifier)
+## 2. Neural Network (MLP Classifier)
 
-Advantages:
+An Artificial Neural Network was implemented using Scikit-Learn's MLPClassifier.
+
+Architecture:
+
+```python
+hidden_layer_sizes=(64,32)
+```
+
+### Advantages
 
 - Learns nonlinear relationships
+- Captures complex feature interactions
 - Better pattern recognition
-- Higher predictive capability
 
-Limitations:
+### Limitations
 
-- Requires more computational resources
-- Less interpretable than linear models
+- Higher computational cost
+- Lower interpretability
 
 ---
 
-## Evaluation Metrics
+# Feature Importance Analysis
 
-The following metrics were used to assess model performance:
+Feature importance analysis helps identify which variables contribute most to customer churn prediction.
+
+<p align="center">
+  <img src="images/feature_importance.png" width="850">
+</p>
+
+Key influential features typically include:
+
+- Age
+- Balance
+- Credit Score
+- Number of Products
+- Estimated Salary
+- Customer Activity Status
+
+---
+
+# Model Evaluation
+
+Both models were evaluated using multiple classification metrics.
+
+### Metrics Used
 
 - Accuracy
 - Precision
@@ -210,75 +235,78 @@ The following metrics were used to assess model performance:
 - ROC Curve
 - AUC Score
 
-These metrics provide a comprehensive understanding of classification effectiveness and prediction quality.
+These metrics provide a comprehensive evaluation of classification performance.
 
 ---
 
-## Experimental Results
+# Results and Discussion
 
-After training and evaluation:
+The developed models successfully learned customer behavior patterns and predicted churn likelihood.
 
-- Logistic Regression provided a reliable baseline performance.
-- Neural Network captured more complex customer behavior patterns.
-- ROC Curve analysis was used to compare classification capabilities.
-- Feature importance analysis revealed key churn-driving factors.
+Observations:
 
-The final comparison demonstrates how different machine learning approaches perform on the same customer churn dataset.
+- Logistic Regression provided a strong baseline.
+- Neural Network captured more complex relationships.
+- ROC analysis enabled performance comparison.
+- Feature importance analysis improved model interpretability.
 
----
-
-## Key Learning Outcomes
-
-Through this project:
-
-- Applied complete machine learning workflow
-- Performed data preprocessing and feature engineering
-- Conducted exploratory data analysis
-- Implemented classification algorithms
-- Built an Artificial Neural Network
-- Compared model performance
-- Generated business-oriented insights from data
-- Visualized model behavior using multiple evaluation techniques
+The comparison demonstrates how different machine learning approaches perform on the same business problem.
 
 ---
 
-## Future Improvements
+# Visualizations Generated
 
-Potential enhancements include:
+The notebook automatically generates:
+
+- Customer Distribution Plot
+- Gender Distribution Plot
+- Age Distribution Plot
+- Correlation Heatmap
+- Logistic Regression Confusion Matrix
+- Neural Network Confusion Matrix
+- ROC Curve Comparison
+- Feature Importance Plot
+- Model Accuracy Comparison
+
+---
+
+# Future Improvements
+
+Potential future enhancements include:
 
 - Hyperparameter Optimization
 - Cross Validation
-- Class Imbalance Handling (SMOTE)
-- Random Forest Classifier
-- XGBoost Classifier
-- LightGBM Classifier
-- Deep Learning with TensorFlow/Keras
-- Deployment using Flask or FastAPI
+- Class Imbalance Handling using SMOTE
+- Random Forest
+- XGBoost
+- LightGBM
+- Deep Learning with TensorFlow
+- Model Deployment using Flask
 - Interactive Dashboard using Streamlit
 
 ---
 
-## Installation
+# Installation
 
-Clone the repository:
+Clone the repository
 
 ```bash
-git clone https://github.com/your-username/customer-churn-prediction.git
+git clone https://github.com/Bitttu4/customer-churn-prediction.git
 ```
 
-Navigate to the project directory:
+Move into the project directory
 
 ```bash
 cd customer-churn-prediction
 ```
 
-Install dependencies:
+Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Launch Jupyter Notebook:
+Launch Jupyter Notebook
 
 ```bash
 jupyter notebook
@@ -286,7 +314,7 @@ jupyter notebook
 
 ---
 
-## Requirements
+# Requirements
 
 ```text
 pandas
@@ -297,24 +325,18 @@ scikit-learn
 jupyter
 ```
 
-Install all dependencies using:
-
-```bash
-pip install -r requirements.txt
-```
-
 ---
 
-## Author
+# Author
 
 Aarya Patel
 
 B.Tech Information Technology
 
-Machine Learning Project – Customer Churn Prediction
+Machine Learning Project
 
 ---
 
-## License
+# License
 
-This project is intended for educational and academic purposes.
+This repository is intended for educational and learning purposes.
