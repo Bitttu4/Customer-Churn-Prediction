@@ -296,7 +296,7 @@ Run all notebook cells sequentially.
 
 Aarya Patel
 
-B.Tech Information Technology
+B.Tech Computer Engineering 
 
 Machine Learning Project
 
